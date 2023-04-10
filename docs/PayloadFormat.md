@@ -53,19 +53,13 @@ Here's an example for a typical ERC20 `Approval` event:
 **Note:** only named arguments are provided in `args` in case the ABI specifies named arguments. Otherwise only numeric arguments are provided like that:
 
 ```json
-{
-  "v": 1,
-
-  ...
-
-  "event": {
-    "args": {
-      "0": "0x7B147033004bF1cE612A882F7A86Bf5D44a43A65",
-      "1": "0xC01B5257e5c429CAC258B150FE8F2d7D241a09C9",
-      "2": "10000000000000000000000000"
-    }
-  },
-  ...
+"event": {
+  "args": {
+    "0": "0x7B147033004bF1cE612A882F7A86Bf5D44a43A65",
+    "1": "0xC01B5257e5c429CAC258B150FE8F2d7D241a09C9",
+    "2": "10000000000000000000000000"
+  }
+}
 ```
 
 **Note: all Number values in args are encoded as strings.**

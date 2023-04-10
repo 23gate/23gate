@@ -16,9 +16,9 @@ Why?
 
 ## Quickstart in 3 easy steps
 
-0. Install the application on your server as per [Installation](/docs/Installation.md).
+0\. Install the application on your server as per [Installation](/docs/Installation.md).
 
-1. Launch this sample node.js code on your externally accessible server:
+1\. Launch this sample node.js code on your externally accessible server:
 
 <details>
 <summary>Sample webhook listener</summary>
@@ -118,11 +118,11 @@ console.log(`Example webhook server with signature validation is listening on ht
 ```
 </details>
 
-2. Head over to your installed app and create a webhook that listens for the **Approval** event on contract `0x55d398326f99059fF775485246999027B3197955` (USDT) on the **BNB Chain.** Then, type in the proper **Endpoint URL** of your recently launched server.
+2\. Head over to your installed app and create a webhook that listens for the **Approval** event on a popular contract address like USDT on the chain of your choice. Then type in the proper **Endpoint URL** of your recently launched server.
 
 > Can't launch a server right now? No problem: use the wonderful https://webhook.site/ service for testing.
 
-3. In just a few seconds, you'll see incoming webhook notifications of the USDT approvals happening on the BNB Chain.
+3\. In just a few seconds, you'll see incoming webhook notifications of the USDT approvals happening on the BNB Chain.
 
 ## Important pages
 

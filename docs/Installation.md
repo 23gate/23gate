@@ -6,9 +6,10 @@ In order to run 23gate you will need:
 
 1. An RPC provider for every network you are interested in. We strongly recommend running your own instance for high-traffic events monitoring.
 2. Recent node.js installed.
-3. MySQL up and running with a separate database created for the application[^1].
+3. MySQL up and running with a separate database created for the application.
 4. API keys for all Etherscan instances on networks that you want to run 23gate on. This is required for ABI fetching.
 
+Note: MySQL is mandatory because we use the full-text index for certain features. It should not be very hard to port this code to other SQL databases, this just haven't been done yet.
 
 ## Prepare
 
@@ -67,9 +68,3 @@ Run the sender, a single instance for all chains:
 ```
 node sender.mjs
 ```
-
-# Support
-
-Open issues in this repository.
-
-[^1] MySQL is mandatory because we use the full-text index for certain features. It should not be very hard to port this code to other SQL databases, this just haven't been done yet.
