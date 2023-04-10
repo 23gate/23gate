@@ -11,9 +11,9 @@
 
   <page-header title="Important pages" class="mt-24" />
 
-  <large-link icon="fa-solid fa-person-harassing" title="Documentation and quickstart" subtitle="Sample server and service description" href="https://23gate.gitbook.io/23gate/" />
-  <large-link class="mt-8" icon="fa-solid fa-person-drowning" title="FAQ" subtitle="Frequently Asked Questions" href="https://23gate.gitbook.io/23gate/faq" />
-  <large-link class="mt-8" icon="fa-solid fa-pizza-slice" title="Payload" subtitle="JSON format description and details" href="https://23gate.gitbook.io/23gate/payload-format" />
+  <large-link icon="fa-solid fa-person-harassing" title="Documentation and quickstart" subtitle="Sample server and service description" href="https://github.com/23gate/23gate/blob/master/docs/Quickstart.md" />
+  <large-link class="mt-8" icon="fa-solid fa-person-drowning" title="FAQ" subtitle="Frequently Asked Questions" href="https://github.com/23gate/23gate/blob/master/docs/FAQ.md" />
+  <large-link class="mt-8" icon="fa-solid fa-pizza-slice" title="Payload" subtitle="JSON format description and details" href="https://github.com/23gate/23gate/blob/master/docs/PayloadFormat.md" />
 </template>
 
 <script setup>

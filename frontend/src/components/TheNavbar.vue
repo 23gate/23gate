@@ -17,7 +17,7 @@
             Archive
           </router-link>
 
-          <a class="block rounded-md py-2 px-4 text-sm text-slate-700" href="https://23gate.gitbook.io/23gate/" target="_blank">
+          <a class="block rounded-md py-2 px-4 text-sm text-slate-700" href="https://github.com/23gate/23gate/tree/master/docs" target="_blank">
             Docs
           </a>
         </div>
@@ -88,7 +88,7 @@
                   <menu-item
                     as="a"
                     target="_blank"
-                    href="https://23gate.gitbook.io/23gate/"
+                    href="https://github.com/23gate/23gate/tree/master/docs"
                     class="block px-3.5 py-1.5 hover:bg-slate-100"
                     role="menuitem"
                     tabindex="-1"

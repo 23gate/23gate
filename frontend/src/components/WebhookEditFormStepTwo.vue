@@ -202,7 +202,7 @@
               <div class="text-slate-500 text-sm mb-10">
                 Test webhooks are sent with <code class="text-slate-700 bg-slate-100 py-1 px-3 rounded-md mx-2">isLive:&nbsp;false</code> in JSON and filled with random values,
                 resembling those of the real event.
-                See <a href="https://23gate.gitbook.io/23gate/testing-webhooks" target="_blank" class="underline text-slate-600 hover:text-slate-800">docs</a>
+                See <a href="https://github.com/23gate/23gate/blob/master/docs/TestingWebhooks.md" target="_blank" class="underline text-slate-600 hover:text-slate-800">docs</a>
                 for more information on webhook testing.
               </div>
 
