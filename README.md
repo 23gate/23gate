@@ -12,3 +12,14 @@
 * [Verifying signature](/docs/VerifyingSignature.md)
 * [Testing webhooks](/docs/TestingWebhooks.md)
 * [FAQ](/docs/FAQ.md)
+
+## Authors
+
+23gate is made by the team at Ariadne Finance:
+
+* [Egor Egorov](https://github.com/egorFiNE) me@egorfine.com
+* [Roman Zhbadinskyi](https://github.com/insky) zhbadynskyi@gmail.com
+
+## License
+
+Apache 2.0. See [LICENSE](/LICENSE).

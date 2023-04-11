@@ -46,3 +46,17 @@ Events on proxy implementation contracts are still emitted in the context of the
 
 Not handled yet, this is why "Confirmations count" is coming soon in the webhook edit screen. For now you should query your RPC endpoint for the transaction hash after a while and make sure that it still exists.
 
+## Will I need to run my own RPC node?
+
+Probably yes. Currently `downloader.js` does download every block to match required events with bloom filters, so you'll have ≈7,200 RPC calls on Ethereum Mainnet and probably tens of thousands on Polygon or BSC.
+
+## Who created 23gate?
+
+23gate is made by the team at Ariadne Finance:
+
+* [Egor Egorov](https://github.com/egorFiNE) me@egorfine.com
+* [Roman Zhbadinskyi](https://github.com/insky) zhbadynskyi@gmail.com
+
+## How is the code licensed?
+
+Apache 2.0. See [LICENSE](/LICENSE).
