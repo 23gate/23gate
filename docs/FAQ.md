@@ -54,8 +54,8 @@ Probably yes. Currently `downloader.js` does download every block to match requi
 
 23gate is made by the team at Ariadne Finance:
 
-* [Egor Egorov](https://github.com/egorFiNE) me@egorfine.com
-* [Roman Zhbadinskyi](https://github.com/insky) zhbadynskyi@gmail.com
+* Egor Egorov [@egorFiNE](https://github.com/egorFiNE) \<me@egorfine.com>
+* Roman Zhbadinskyi [@insky](https://github.com/insky) \<zhbadynskyi@gmail.com>
 
 ## How is the code licensed?
 
