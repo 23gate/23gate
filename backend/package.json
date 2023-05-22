@@ -10,23 +10,23 @@
     "@fastify/autoload": "^5.7.1",
     "@fastify/cors": "^8.2.1",
     "@fastify/formbody": "^7.4.0",
-    "@fastify/one-line-logger": "^1.1.1",
-    "@fastify/static": "^6.10.0",
+    "@fastify/one-line-logger": "^1.2.0",
+    "@fastify/static": "^6.10.1",
     "dotenv": "^16.0.3",
-    "ethers": "^6.3.0",
-    "fastify": "^4.15.0",
-    "fastify-auth0-verify": "^1.1.0",
+    "ethers": "^6.4.0",
+    "fastify": "^4.17.0",
+    "fastify-auth0-verify": "^1.1.2",
     "mysql2": "^3.2.0",
     "pino-pretty": "^10.0.0",
-    "sequelize": "^6.31.0",
+    "sequelize": "^6.31.1",
     "supertokens-node": "^13.4.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.21.3",
+    "@babel/eslint-parser": "^7.21.8",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
-    "@babel/preset-env": "^7.21.4",
-    "@faker-js/faker": "^7.6.0",
+    "@babel/preset-env": "^7.21.5",
+    "@faker-js/faker": "^8.0.1",
     "mocha": "^10.2.0"
   }
 }
