@@ -2,10 +2,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import {
-  faTwitter,
   faFacebook,
   faLinkedin,
-  faTelegram,
   faGithub
 } from '@fortawesome/free-brands-svg-icons';
 

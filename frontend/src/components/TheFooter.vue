@@ -2,11 +2,6 @@
   <footer>
     <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
       <div class="flex justify-center space-x-6 md:order-2">
-        <a href="https://t.me/two_three_gate" target="_blank">
-          <span class="sr-only">Telegram</span>
-          <font-awesome-icon icon="fa-brands fa-telegram" class="h-6 w-6" aria-hidden="true" />
-        </a>
-
         <a href="https://github.com/23gate/23gate/" target="_blank">
           <span class="sr-only">Github</span>
           <font-awesome-icon icon="fa-brands fa-github" class="h-6 w-6" aria-hidden="true" />
@@ -15,11 +10,6 @@
         <a href="mailto:me@egorfine.com">
           <span class="sr-only">Email</span>
           <font-awesome-icon icon="fa-solid fa-envelope" class="h-6 w-6" aria-hidden="true" />
-        </a>
-
-        <a href="https://twitter.com/23gatecom" target="_blank">
-          <span class="sr-only">Twitter</span>
-          <font-awesome-icon icon="fa-brands fa-twitter" class="h-6 w-6" aria-hidden="true" />
         </a>
       </div>
 
