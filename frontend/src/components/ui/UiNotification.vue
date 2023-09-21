@@ -1,6 +1,6 @@
 <template>
   <Notification
-    v-slot="{ notifications, close }"
+    v-slot="{ notifications, close, hovering }"
     v-bind="$attrs"
     ref="notification"
     enter="ease-out duration-300 transition"
@@ -12,7 +12,7 @@
     move="transition duration-500"
     move-delay="delay-300"
   >
-    <slot :notifications="notifications" :close="close" />
+    <slot :notifications="notifications" :close="close" :hovering="hovering" />
   </Notification>
 </template>
 
