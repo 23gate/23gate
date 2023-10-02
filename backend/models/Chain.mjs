@@ -27,7 +27,7 @@ export class Chain extends Model {
       return record.blockNumber;
     }
 
-    this.create({ chainId });
+    await this.create({ chainId });
 
     return 0;
   }
