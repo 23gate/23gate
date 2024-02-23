@@ -74,7 +74,7 @@ DataTypes.TXHASH = Utils.classToInvokable(TXHASH);
 
 const { User } = await import('./User.model.mjs');
 const { Transaction } = await import('./Transaction.model.mjs');
-const { Chain } = await import('./Chain.mjs');
+const { Chain } = await import('./Chain.model.mjs');
 const { Webhook } = await import('./Webhook.model.mjs');
 const { Payload } = await import('./Payload.model.mjs');
 const { PayloadFinished } = await import('./PayloadFinished.model.mjs');
