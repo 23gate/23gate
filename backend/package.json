@@ -22,11 +22,10 @@
     "supertokens-node": "^13.4.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.22.15",
-    "@babel/plugin-syntax-class-properties": "^7.12.13",
-    "@babel/plugin-syntax-top-level-await": "^7.14.5",
-    "@babel/preset-env": "^7.22.20",
     "@faker-js/faker": "^8.1.0",
-    "mocha": "^10.2.0"
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.1.0"
   }
 }
