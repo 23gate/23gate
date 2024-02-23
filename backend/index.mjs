@@ -4,37 +4,125 @@ import Fastify from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
 import FastifyStatic from '@fastify/static';
 import FastifyCors from '@fastify/cors';
+import FastifyCookie from '@fastify/cookie';
 import { sequelize } from './models/index.mjs';
-import supertokens from "./supertokens.mjs";
-import { plugin } from "supertokens-node/framework/fastify/index.js";
 import formDataPlugin from "@fastify/formbody";
-import { verifySession } from "supertokens-node/recipe/session/framework/fastify/index.js";
-import EmailPassword from 'supertokens-node/recipe/emailpassword/index.js';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const logger = isProduction ? undefined : {
-  transport: {
-    target: '@fastify/one-line-logger'
-  }
-};
-
-const fastify = Fastify({
-  logger
-});
+const fastify = Fastify({ });
 
 fastify.register(FastifyCors, {
-  origin: process.env.SUPERTOKENS_WEBSITEDOMAIN,
-  allowedHeaders: ['Content-Type', ...supertokens.getAllCORSHeaders()],
   credentials: true
 });
 
 fastify.register(formDataPlugin);
-fastify.register(plugin);
+
+
+fastify.register(FastifyCookie, {
+  secret: 'ignore', // we don't use cookie serialize/deserialize
+  hook: 'onRequest',
+  parseOptions: {}
+});
 
 fastify.decorate('sequelize', sequelize);
 
-if (process.env.NODE_ENV == 'production') {
+fastify.get('/login/github', async (request, reply) => reply.redirect(
+  302,
+  `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
+));
+
+async function getAccessToken(code) {
+  let json = null;
+
+  try {
+    const response = await fetch(
+      `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${code}`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: ''
+      }
+    );
+
+    json = await response.json();
+
+  } catch (e) {
+    console.error(e);
+  }
+
+  return json?.access_token || null;
+}
+
+async function getUserInfo(accessToken) {
+  let json = null;
+
+  try {
+    const response2 = await fetch(
+      'https://api.github.com/user',
+      {
+        headers: {
+          Authorization: 'token ' + accessToken
+        }
+      }
+    );
+
+    json = await response2.json();
+
+  } catch (e) {
+    console.error(e);
+  }
+
+  return json;
+}
+
+fastify.get('/login/github/callback', async (request, reply) => {
+  const { code } = request.query;
+
+  const accessToken = await getAccessToken(code);
+  if (!accessToken) {
+    reply.code(401);
+    return "Unauthorized";
+  }
+
+  const userInfo = await getUserInfo(accessToken);
+
+  if (!userInfo.id) {
+    reply.code(401);
+    return "Unauthorized (2)";
+  }
+
+  await fastify.sequelize.models.User.findOrCreate({
+    where: {
+      id: userInfo.id
+    },
+    defaults: {
+      id: userInfo.id,
+      email: userInfo.email
+    }
+  });
+
+  reply
+    .setCookie(process.env.SESSION_COOKIE_NAME, userInfo.id, { // FIXME naive
+      path: '/',
+      httpOnly: true,
+      maxAge: parseInt(process.env.SESSION_EXPIRATION_SECONDS, 10)
+    })
+    .redirect(302, '/');
+});
+
+fastify.get('/login/logout', async (request, reply) => {
+  reply
+    .clearCookie(process.env.SESSION_COOKIE_NAME, {
+      path: '/',
+      httpOnly: true
+    })
+    .redirect(302, '/');
+});
+
+if (isProduction) {
   const root = path.resolve(process.cwd(), path.dirname(process.argv[1]), '..', 'frontend-dist');
   fastify.register(FastifyStatic, {
     root
@@ -43,26 +131,15 @@ if (process.env.NODE_ENV == 'production') {
 
 fastify.addHook('onRequest', async (request, reply) => {
   if (request.url.startsWith('/api/')) {
-    try {
-      await verifySession()(request, reply);
-    } catch (err) {
-      console.log('Supertokens VerifySession error:', err);
-    }
-
-    const userId = request?.session?.getUserId ? request.session.getUserId() : null;
-    if (!userId) {
+    if (!request.cookies[process.env.SESSION_COOKIE_NAME]) {
       reply.status(401).send({ success: false, message: "Unauthorized" });
       return;
     }
 
-    request.user = await fastify.sequelize.models.User.findOne({ where: { uuid: userId } }, { raw: true });
+    request.user = await sequelize.models.User.findByPk(request.cookies[process.env.SESSION_COOKIE_NAME]);
     if (!request.user) {
-      const userInfo = await EmailPassword.getUserById(userId);
-
-      request.user = (await fastify.sequelize.models.User.create({
-        uuid: userId,
-        email: userInfo.email
-      })).get({ plain:true });
+      reply.status(401).send({ success: false, message: "Unauthorized" });
+      return;
     }
   }
 });

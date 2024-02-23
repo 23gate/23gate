@@ -5,23 +5,15 @@ import WebhookEditPage from '@/views/WebhookEditPage.vue';
 import WebhookViewPage from '@/views/WebhookViewPage.vue';
 import PayloadListPage from '@/views/PayloadListPage.vue';
 import StartPage from '@/views/StartPage.vue';
-import AuthPage from '@/views/AuthPage.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
+import { isAuthenticated } from './useSession';
 
-import Session from "supertokens-web-js/recipe/session";
-
-const authGuard = async () => ((await Session.doesSessionExist()) ? true : '/a/');
+const authGuard = async () => isAuthenticated.value ? true : '/login/github';
 
 const routes = [
   {
     path: '/',
     component: StartPage
-  },
-
-  {
-    path: '/a/:pathMatch(.*)*',
-    name: 'AuthPage',
-    component: AuthPage
   },
 
   {

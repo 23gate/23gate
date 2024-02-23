@@ -43,7 +43,6 @@ import { networkByChainId } from '@common/networks';
 import ReloadButton from '@/components/ReloadButton.vue';
 import { Modal } from '@/useModal';
 import { $error } from '@/notify';
-import { updateUserProperties } from '@/useSession';
 
 const webhooks = ref(null); // ref to the grid component
 
@@ -175,7 +174,7 @@ async function toggleIsEnabled({ row, index }) {
   webhooks.value.updateRow(index, { ...row, status, isEnabled: status == 'enabled' });
 
   if (status == 'enabled') {
-    updateUserProperties();
+    // updateUserProperties(); // FIXME
   }
 }
 </script>

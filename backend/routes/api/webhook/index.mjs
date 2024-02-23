@@ -59,6 +59,7 @@ export default async function routes(instance) {
 
           } else {
             const str = instance.sequelize.escape(searchStringNormalized + '*');
+            // FIXME MySQL only
             where.push(
               instance.sequelize.Sequelize.literal(`MATCH (addressList, eventName) AGAINST(${str} IN BOOLEAN MODE)`)
             );

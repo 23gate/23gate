@@ -176,7 +176,6 @@ import { $success, $error } from '@/notify';
 import { Modal } from '@/useModal';
 import { networkByChainId } from '@common/networks';
 import { useRouter } from 'vue-router';
-import { updateUserProperties } from '@/useSession';
 
 const router = useRouter();
 
@@ -255,7 +254,7 @@ async function toggleIsEnabled() {
   webhook.value.status = status;
 
   if (status == 'enabled') {
-    updateUserProperties();
+    // updateUserProperties(); // FIXME
   }
 }
 

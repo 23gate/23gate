@@ -33,9 +33,6 @@ const Loader = {
 };
 
 export const config = {
-  /// API prefix
-  prefix: null,
-
   /// Loader show timeout
   timeout: 500
 };
@@ -56,7 +53,7 @@ async function _fetch(url, options = {}) {
   _options.headers.accept = 'application/json';
   _options.headers['content-type'] = 'application/json';
 
-  const _url = config.prefix + url;
+  const _url = '/api' + url;
 
   let response = null;
   try {

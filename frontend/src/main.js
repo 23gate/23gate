@@ -7,7 +7,6 @@ import theme from '@/formkit-theme';
 import { configureApi } from '@/useApi';
 import { $error } from '@/notify';
 import { FontAwesomeIcon } from '@/fontawesome';
-import '@/supertokens';
 import '@/useDark';
 import { VTooltip } from 'floating-vue';
 
@@ -16,8 +15,6 @@ import 'floating-vue/dist/style.css';
 import '@/assets/css/main.scss';
 
 configureApi({
-  prefix: import.meta.env.VITE_API_URL_PREFIX,
-
   onException: () => {
     $error("Request failed", "Couldn't perform request. Try again later.");
   },

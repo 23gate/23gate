@@ -3,11 +3,7 @@ export default async function routes(instance) {
     '/',
 
     async request => {
-      let isFailedWebhook = null;
-
-      if (request.user) {
-        isFailedWebhook = await instance.sequelize.models.Webhook.isFailedWebhooksPresentByUserId(request.user.id);
-      }
+      const isFailedWebhook = await instance.sequelize.models.Webhook.isFailedWebhooksPresentByUserId(request.user.id);
 
       return {
         success: true,

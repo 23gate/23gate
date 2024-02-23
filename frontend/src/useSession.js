@@ -1,12 +1,8 @@
-import * as Session from "supertokens-web-js/recipe/session";
-import { config } from '@/useApi';
 import { computed, shallowRef } from "vue";
 
-export const userId = shallowRef(null);
+export const userProperties = shallowRef(null);
 
-export const userProperties = shallowRef({});
-
-export const isAuthenticated = computed(() => userId.value !== null);
+export const isAuthenticated = computed(() => (userProperties.value?.email ?? null) !== null);
 
 export const isUserLoading = shallowRef(true);
 
@@ -17,7 +13,7 @@ async function whoami() {
     }
   };
 
-  const url = config.prefix + '/whoami/';
+  const url = '/api/whoami/';
 
   let response = null;
   try {
@@ -26,49 +22,22 @@ async function whoami() {
     return null;
   }
 
+  if (response.status === 401) {
+    return null;
+  }
+
   const json = await response.json();
+  console.log(json);
   return json;
 }
 
 export async function getUserInfo() {
   isUserLoading.value = true;
-
-  const session = await Session.doesSessionExist();
-
-  if (session) {
-    [ userId.value, userProperties.value ] = await Promise.all([
-      Session.getUserId(),
-      whoami()
-    ]);
-
-    isUserLoading.value = false;
-
-    return;
-  }
-
+  userProperties.value = await whoami();
   isUserLoading.value = false;
-  userId.value = null;
-  userProperties.value = {};
 }
-
-export async function updateUserProperties() {
-  if (!userId.value) {
-    return;
-  }
-
-  const result = await whoami();
-  if (!result) {
-    return;
-  }
-
-  userProperties.value = result;
-}
-
-setInterval(updateUserProperties, 10000);
 
 export async function logout() {
-  await Session.signOut();
-  userId.value = null;
-  userProperties.value = {};
-  window.location = '/';
+  userProperties.value = null;
+  window.location = '/login/logout';
 }

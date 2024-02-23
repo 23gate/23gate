@@ -1,12 +1,12 @@
 import { Sequelize, Model } from 'sequelize';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 
 export class User extends Model {
   static structure = {
-    uuid: {
-      type: Sequelize.DataTypes.UUID,
+    id: { // same as returned from OAuth2 provider (GitHub)
+      type: Sequelize.DataTypes.BIGINT.UNSIGNED,
       allowNull: false,
-      unique: true
+      primaryKey: true
     },
 
     email: {
@@ -21,7 +21,7 @@ export class User extends Model {
   }
 
   static generateSecret() {
-    return uuidv4();
+    return randomUUID();
   }
 
   static options = {

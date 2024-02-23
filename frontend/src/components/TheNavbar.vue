@@ -24,12 +24,13 @@
 
         <delivered-webhooks v-if="false" :count="0" />
 
-        <failed-webhook v-if="userProperties.isFailedWebhook" />
+        <failed-webhook v-if="userProperties?.isFailedWebhook" />
 
         <the-theme-toggler v-if="false" class="mx-4" />
 
         <div class="lg:ml-4 lg:flex lg:items-center lg:border-l lg:border-slate-900/15 lg:pl-8">
           <spinner v-if="isUserLoading" />
+
           <v-menu v-else-if="isAuthenticated" as="div" class="relative">
             <menu-button id="user-menu-button" class="flex items-center font-semibold hover:text-slate-900" aria-expanded="false" aria-haspopup="true">
               <span class="hidden items-center md:flex">
@@ -58,7 +59,7 @@
                 <div class="truncate py-3 px-3.5" role="none">
                   <div class="text-xs text-slate-500" role="none">Signed in as</div>
                   <div class="mt-0.5 font-semibold" role="none">
-                    {{ userProperties.email }}
+                    {{ userProperties?.email }}
                   </div>
                 </div>
 
@@ -137,7 +138,7 @@
             </transition-appear>
           </v-menu>
 
-          <router-link v-else-if="isSignInButtonVisible" to="/a/" class="btn-primary"> Sign In </router-link>
+          <a v-else href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f90cf799edc87ea497b6" class="btn-primary"> Sign In </a>
         </div>
       </div>
     </nav>
@@ -153,17 +154,17 @@ import DeliveredWebhooks from '@/components/DeliveredWebhooks.vue';
 import FailedWebhook from '@/components/FailedWebhook.vue';
 import ChangeSecretModal from '@/components/ChangeSecretModal.vue';
 import TransitionAppear from '@/components/TransitionAppear.vue';
-import { markRaw } from 'vue';
+import { markRaw, watch } from 'vue';
 // import { $error } from '@/notify';
 import { Modal } from '@/useModal';
 import { isUserLoading, isAuthenticated, userProperties, logout } from '@/useSession';
 import { useRoute, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
+watch(isAuthenticated, v => console.log('isAuth', v), { immediate: true });
+
 const route = useRoute();
 const router = useRouter();
-
-const isSignInButtonVisible = computed(() => route.name != 'AuthPage');
 
 async function changePassword() {
   router.push('/a/reset-password');

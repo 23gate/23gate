@@ -95,7 +95,7 @@ async function get() {
 
   let response;
   try {
-    response = await fetch(import.meta.env.VITE_API_URL_PREFIX + '/../api-public/stats/');
+    response = await fetch('/api-public/stats/');
 
   } catch (error) {
     error.value = "Cannot load status";

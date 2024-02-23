@@ -8,9 +8,10 @@
   },
   "dependencies": {
     "@fastify/autoload": "^5.7.1",
+    "@fastify/cookie": "^9.3.1",
     "@fastify/cors": "^8.4.0",
     "@fastify/formbody": "^7.4.0",
-    "@fastify/one-line-logger": "^1.2.0",
+    "@fastify/oauth2": "^7.8.0",
     "@fastify/static": "^6.11.2",
     "dotenv": "^16.3.1",
     "ethers": "^6.7.1",
@@ -18,8 +19,7 @@
     "fastify-auth0-verify": "^1.2.0",
     "mysql2": "^3.6.1",
     "pino-pretty": "^10.2.0",
-    "sequelize": "^6.33.0",
-    "supertokens-node": "^13.4.0"
+    "sequelize": "^6.33.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.1.0",
