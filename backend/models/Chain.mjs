@@ -19,7 +19,7 @@ export class Chain extends Model {
       allowNull: false,
       defaultValue: 0
     }
-  }
+  };
 
   static async getLastSyncedBlockByChainId(chainId) {
     const record = await this.findByPk(chainId);
@@ -49,5 +49,5 @@ export class Chain extends Model {
 
   static options = {
     timestamps: false
-  }
+  };
 }
