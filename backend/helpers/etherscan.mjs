@@ -4,10 +4,10 @@ import { ethers } from 'ethers';
 import { parseAbi } from './parseAbi.mjs';
 import * as url from 'url';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const etherscansConfigFilename = path.join(__dirname, '..', 'etherscans.json');
-const abiCacheFilename = path.join(__dirname, '..', 'abi-cache.json');
+const etherscansConfigFilename = path.join(dirname, '..', 'etherscans.json');
+const abiCacheFilename = path.join(dirname, '..', 'abi-cache.json');
 
 let cache = {};
 let explorerUrlByChainId;
@@ -46,14 +46,14 @@ export async function getAbi(address, chainId) {
       const result = await getAbi(cache[cacheKey].implementation, chainId);
       implementationEvents = result.events;
     }
-    return { success: true, events: { ...cache[cacheKey], implementationEvents }};
+    return { success: true, events: { ...cache[cacheKey], implementationEvents } };
   }
 
-  const url = explorerUrlByChainId[chainId].replace('%ADDRESS%', address);
+  const explorerUrl = explorerUrlByChainId[chainId].replace('%ADDRESS%', address);
 
   let response;
   try {
-    response = await fetch(url);
+    response = await fetch(explorerUrl);
   } catch (error) {
     console.log(error);
     return { success: false, message: "Failed to fetch contract ABI from Etherscan" };
@@ -92,7 +92,7 @@ export async function getAbi(address, chainId) {
   }
 
   const eventFragments = parsedAbi.fragments.filter(f => ethers.Fragment.isEvent(f));
-  if (eventFragments.length == 0) {
+  if (eventFragments.length === 0) {
     return { success: false, message: "Zero events in ABI" };
   }
 

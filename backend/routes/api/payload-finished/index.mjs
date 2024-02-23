@@ -16,7 +16,7 @@ export default async function routes(instance) {
               type: 'number'
             }
           },
-          required: ['limit', 'offset']
+          required: [ 'limit', 'offset' ]
         }
       }
     },
@@ -31,7 +31,7 @@ export default async function routes(instance) {
         offset: request.query.offset,
         subQuery: false,
         raw: true,
-        order: [[ 'id', 'DESC' ]]
+        order: [ [ 'id', 'DESC' ] ]
       };
 
       if (request.query.search) {

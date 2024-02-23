@@ -10,11 +10,11 @@ export default async function routes(instance) {
 
       const result = await instance.sequelize.models.Payload.findAndCountAll({
         where: {
-          webhookId: webhook.id,
+          webhookId: webhook.id
         },
         limit: 11,
         raw: true,
-        order: [[ 'id', 'DESC' ]]
+        order: [ [ 'id', 'DESC' ] ]
       });
 
       return { success: true, ...result };

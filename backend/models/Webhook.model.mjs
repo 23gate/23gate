@@ -52,7 +52,7 @@ export class Webhook extends Model {
       allowNull: false,
       defaultValue: 0
     }
-  }
+  };
 
   static parseAddressListString(str) {
     try {
@@ -107,11 +107,11 @@ export class Webhook extends Model {
         fields: [ 'addressList', 'eventName' ]
       },
       {
-        fields: ['userId']
+        fields: [ 'userId' ]
       },
       {
-        fields: ['chainId']
+        fields: [ 'chainId' ]
       }
     ]
-  }
+  };
 }

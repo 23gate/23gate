@@ -31,7 +31,7 @@ export class Transaction extends Model {
       type: Sequelize.DataTypes.JSON,
       allowNull: false
     }
-  }
+  };
 
   static async destroyTransactionsByHashList(transactionHash, transaction) {
     await this.destroy({
@@ -48,8 +48,8 @@ export class Transaction extends Model {
         chainId
       },
       order: [ // we must sort in order to put sorted into Payload table as they are delivered sequentially
-        ['blockNumber', 'asc'],
-        ['transactionIndex', 'asc'],
+        [ 'blockNumber', 'asc' ],
+        [ 'transactionIndex', 'asc' ]
       ],
       limit
     });
@@ -57,15 +57,15 @@ export class Transaction extends Model {
 
   static async ingestReceiptsForChainId(receipts, chainId, transaction) {
     const records = receipts.map(receipt => (
-      '(' +
-        [
-          this.sequelize.escape(chainId),
-          receipt.transactionHash,
-          this.sequelize.escape(receipt.blockNumber),
-          this.sequelize.escape(receipt.transactionIndex),
-          this.sequelize.escape(JSON.stringify(receipt))
-        ].join(', ') +
-      ')'
+      '('
+      + [
+        this.sequelize.escape(chainId),
+        receipt.transactionHash,
+        this.sequelize.escape(receipt.blockNumber),
+        this.sequelize.escape(receipt.transactionIndex),
+        this.sequelize.escape(JSON.stringify(receipt))
+      ].join(', ')
+      + ')'
     ));
 
     await this.bulkCreate(records, {
@@ -79,14 +79,14 @@ export class Transaction extends Model {
 
     indexes: [
       {
-        fields: ['chainId']
+        fields: [ 'chainId' ]
       },
       {
-        fields: ['blockNumber', 'transactionIndex']
+        fields: [ 'blockNumber', 'transactionIndex' ]
       },
       {
-        fields: ['chainId', 'blockNumber', 'transactionIndex']
+        fields: [ 'chainId', 'blockNumber', 'transactionIndex' ]
       }
     ]
-  }
+  };
 }

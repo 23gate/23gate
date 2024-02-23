@@ -1,8 +1,8 @@
 import { Sequelize, Model } from 'sequelize';
 import crypto from 'crypto';
 
-async function randomBytesInHex(length) {
-  const buffer = await crypto.randomBytes(length);
+function randomBytesInHex(length) {
+  const buffer = crypto.randomBytes(length);
   return '0x' + buffer.toString('hex');
 }
 
@@ -107,7 +107,7 @@ export class Payload extends Model {
       allowNull: false,
       defaultValue: Sequelize.NOW
     }
-  }
+  };
 
   static createPayload({ eventName, log, args, transactionReceipt, chainId, webhookId }) {
     return {
@@ -139,7 +139,7 @@ export class Payload extends Model {
 
   static async createTestPayload({ chainId, abi, eventName, addressList, url }) {
     function random(from, to) {
-      const scale = to-from;
+      const scale = to - from;
       const r = Math.round(Math.random() * scale);
       return from + r;
     }
@@ -150,7 +150,7 @@ export class Payload extends Model {
       isLive: false,
 
       event: {
-        address: await randomBytesInHex(20),
+        address: randomBytesInHex(20),
         logIndex: random(1, 30),
         name: eventName,
         args: {
@@ -160,10 +160,10 @@ export class Payload extends Model {
 
       transaction: {
         chainId,
-        from: await randomBytesInHex(20),
-        to: await randomBytesInHex(20),
+        from: randomBytesInHex(20),
+        to: randomBytesInHex(20),
         transactionIndex: random(1, 323),
-        transactionHash: await randomBytesInHex(32),
+        transactionHash: randomBytesInHex(32),
         blockNumber: random(2000000, 5000000)
       }
     };
@@ -217,7 +217,7 @@ export class Payload extends Model {
           isSending: false
         },
 
-        order: [ ['id', 'ASC'] ],
+        order: [ [ 'id', 'ASC' ] ],
 
         limit,
 
@@ -227,7 +227,7 @@ export class Payload extends Model {
         lock: transaction.LOCK.UPDATE
       });
 
-      if (records.length == 0) {
+      if (records.length === 0) {
         return [];
       }
 
@@ -266,15 +266,15 @@ export class Payload extends Model {
 
     indexes: [
       {
-        fields: ['webhookId']
+        fields: [ 'webhookId' ]
       },
       {
-        fields: ['transactionHash', 'logIndex'],
+        fields: [ 'transactionHash', 'logIndex' ],
         unique: true
       },
       {
-        fields: ['nextRequestAt']
+        fields: [ 'nextRequestAt' ]
       }
     ]
-  }
+  };
 }

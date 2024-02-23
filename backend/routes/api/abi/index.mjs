@@ -15,9 +15,9 @@ export default async function routes(instance) {
             },
             address: {
               type: 'string'
-            },
+            }
           },
-          required: ['address', 'chainId']
+          required: [ 'address', 'chainId' ]
         }
       }
     },
@@ -33,7 +33,7 @@ export default async function routes(instance) {
 
       if (process.env.NODE_ENV !== 'production') {
         // emulate BUSD as unverified
-        if (address == '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56') {
+        if (address === '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56') {
           return { success: true, abi: null };
         }
       }

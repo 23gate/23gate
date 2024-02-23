@@ -11,7 +11,7 @@ export default async function routes(instance) {
           type: 'object',
           properties: {
             search: {
-              type: 'string',
+              type: 'string'
             },
             limit: {
               type: 'number'
@@ -20,7 +20,7 @@ export default async function routes(instance) {
               type: 'number'
             }
           },
-          required: ['limit', 'offset']
+          required: [ 'limit', 'offset' ]
         }
       }
     },
@@ -71,7 +71,7 @@ export default async function routes(instance) {
         [instance.sequelize.Sequelize.Op.and]: where
       };
 
-      options.order = [[ 'id', 'DESC' ]];
+      options.order = [ [ 'id', 'DESC' ] ];
 
       const result = await instance.sequelize.models.Webhook.findAndCountAll(options);
 
@@ -119,10 +119,10 @@ export default async function routes(instance) {
                   type: 'number'
                 }
               },
-              required: ['chainId', 'addressList', 'event', 'url', 'confirmations']
-            },
+              required: [ 'chainId', 'addressList', 'event', 'url', 'confirmations' ]
+            }
           },
-          required: ['webhook']
+          required: [ 'webhook' ]
         }
       }
     },
@@ -145,7 +145,7 @@ export default async function routes(instance) {
         return { success: false, message: "Failed to parse address list" };
       }
 
-      const isNetworkFound = networks.find(n => n.chainId == request.body.webhook.chainId && n.isEnabled);
+      const isNetworkFound = networks.find(n => n.chainId === request.body.webhook.chainId && n.isEnabled);
       if (!isNetworkFound) {
         return { success: false, message: "Unknown network" };
       }
@@ -180,7 +180,7 @@ export default async function routes(instance) {
         await webhook.destroy({ transaction });
         await instance.sequelize.models.Payload.destroy({
           where: {
-            webhookId: webhook.id,
+            webhookId: webhook.id
           },
           transaction
         });
@@ -196,7 +196,7 @@ export default async function routes(instance) {
     async request => {
       const webhook = await instance.sequelize.models.Webhook.findByIdAndUserId(request.params.id, request.user.id);
 
-      if (webhook.status == 'enabled' || webhook.status == 'failed') {
+      if (webhook.status === 'enabled' || webhook.status === 'failed') {
         webhook.status = 'disabled';
         await webhook.save();
       }
@@ -214,7 +214,7 @@ export default async function routes(instance) {
     async request => {
       const webhook = await instance.sequelize.models.Webhook.findByIdAndUserId(request.params.id, request.user.id);
 
-      if (webhook.status == 'disabled' || webhook.status == 'failed') {
+      if (webhook.status === 'disabled' || webhook.status === 'failed') {
         webhook.status = 'enabled';
         await webhook.save();
       }
@@ -238,7 +238,7 @@ export default async function routes(instance) {
               type: 'string'
             }
           },
-          required: ['url']
+          required: [ 'url' ]
         }
       }
     },

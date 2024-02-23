@@ -87,7 +87,7 @@ export class PayloadFinished extends Model {
       type: Sequelize.DataTypes.DATE,
       allowNull: false
     }
-  }
+  };
 
   static async expire(ageMinute) {
     await this.destroy({
@@ -103,17 +103,17 @@ export class PayloadFinished extends Model {
     timestamps: false,
     indexes: [
       {
-        fields: ['createdAt']
+        fields: [ 'createdAt' ]
       },
       {
-        fields: ['userId']
+        fields: [ 'userId' ]
       },
       {
-        fields: ['userId', 'webhookId']
+        fields: [ 'userId', 'webhookId' ]
       },
       {
-        fields: ['userId', 'chainId']
+        fields: [ 'userId', 'chainId' ]
       }
     ]
-  }
+  };
 }

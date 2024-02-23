@@ -13,7 +13,7 @@ export default async function routes(instance) {
     '/regenerate/',
 
     async request => {
-      const secret = instance.sequelize.models.User.generateSecret()
+      const secret = instance.sequelize.models.User.generateSecret();
 
       let result;
       try {

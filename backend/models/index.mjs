@@ -1,10 +1,11 @@
+/* eslint-disable max-classes-per-file, class-methods-use-this, no-underscore-dangle */
 import { Sequelize, DataTypes, Utils } from 'sequelize';
 
 class BIGINTNATIVE extends DataTypes.ABSTRACT.prototype.constructor {
   static key = 'BIGINTNATIVE';
 
   toSql() {
-    return 'VARCHAR(80)'
+    return 'VARCHAR(80)';
   }
 
   validate(value, options) { // eslint-disable-line no-unused-vars
@@ -17,7 +18,7 @@ class BIGINTNATIVE extends DataTypes.ABSTRACT.prototype.constructor {
       return null;
     }
 
-    const _value = typeof value == 'bigint' ? value : BigInt(value);
+    const _value = typeof value === 'bigint' ? value : BigInt(value);
     return _value < 0n ? 0n : _value;
   }
 
@@ -37,7 +38,8 @@ class BIGINTNATIVE extends DataTypes.ABSTRACT.prototype.constructor {
   }
 }
 
-BIGINTNATIVE.prototype.key = BIGINTNATIVE.key = 'BIGINTNATIVE';
+BIGINTNATIVE.prototype.key = 'BIGINTNATIVE';
+BIGINTNATIVE.key = 'BIGINTNATIVE';
 DataTypes.BIGINTNATIVE = Utils.classToInvokable(BIGINTNATIVE);
 
 export class TXHASH extends DataTypes.ABSTRACT.prototype.constructor {
@@ -69,7 +71,8 @@ export class TXHASH extends DataTypes.ABSTRACT.prototype.constructor {
   }
 }
 
-TXHASH.prototype.key = TXHASH.key = 'TXHASH';
+TXHASH.prototype.key = 'TXHASH';
+TXHASH.key = 'TXHASH';
 DataTypes.TXHASH = Utils.classToInvokable(TXHASH);
 
 const { User } = await import('./User.model.mjs');
@@ -98,6 +101,6 @@ await sequelize.authenticate();
 sequelize.query('SET CHARACTER SET utf8mb4');
 sequelize.query('SET NAMES UTF8mb4');
 
-[ User, Transaction, Chain, Webhook, Payload, PayloadFinished].forEach(table => table.init(table.structure, { ...table.options, sequelize }));
+[ User, Transaction, Chain, Webhook, Payload, PayloadFinished ].forEach(table => table.init(table.structure, { ...table.options, sequelize }));
 
 await sequelize.sync();

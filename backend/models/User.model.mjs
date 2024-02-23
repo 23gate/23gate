@@ -18,12 +18,12 @@ export class User extends Model {
       type: Sequelize.DataTypes.UUID,
       defaultValue: Sequelize.DataTypes.UUIDV4
     }
-  }
+  };
 
   static generateSecret() {
     return randomUUID();
   }
 
   static options = {
-  }
+  };
 }

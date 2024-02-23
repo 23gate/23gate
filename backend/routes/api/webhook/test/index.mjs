@@ -31,10 +31,10 @@ export default async function routes(instance) {
                   type: 'number'
                 }
               },
-              required: ['chainId', 'addressList', 'event', 'url', 'confirmations']
-            },
+              required: [ 'chainId', 'addressList', 'event', 'url', 'confirmations' ]
+            }
           },
-          required: ['webhook']
+          required: [ 'webhook' ]
         }
       }
     },
@@ -49,7 +49,7 @@ export default async function routes(instance) {
         return { success: false, message: "Failed to parse address list" };
       }
 
-      const isNetworkFound = networks.find(n => n.chainId == request.body.webhook.chainId && n.isEnabled);
+      const isNetworkFound = networks.find(n => n.chainId === request.body.webhook.chainId && n.isEnabled);
       if (!isNetworkFound) {
         return { success: false, message: "Unknown network" };
       }
@@ -73,7 +73,7 @@ export default async function routes(instance) {
     '/:id(^\\d+)/',
 
     async request => {
-      const id = request.params.id;
+      const { id } = request.params;
 
       let c = 10;
       do {

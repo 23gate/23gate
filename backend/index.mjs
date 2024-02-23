@@ -18,7 +18,6 @@ fastify.register(FastifyCors, {
 
 fastify.register(formDataPlugin);
 
-
 fastify.register(FastifyCookie, {
   secret: 'ignore', // we don't use cookie serialize/deserialize
   hook: 'onRequest',
@@ -111,6 +110,8 @@ fastify.get('/login/github/callback', async (request, reply) => {
       maxAge: parseInt(process.env.SESSION_EXPIRATION_SECONDS, 10)
     })
     .redirect(302, '/');
+
+  return reply;
 });
 
 fastify.get('/login/logout', async (request, reply) => {
@@ -207,4 +208,3 @@ fastify.listen(
     }
   }
 );
-
