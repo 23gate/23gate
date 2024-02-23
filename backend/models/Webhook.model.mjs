@@ -75,17 +75,14 @@ export class Webhook extends Model {
   }
 
   static async isFailedWebhooksPresentByUserId(userId) {
-    const result = await this.sequelize.query(
-      'SELECT 1 FROM Webhook WHERE Webhook.userId = ? AND status = "failed"',
-      {
-        replacements: [ userId ],
-        raw: true,
-        plain: true,
-        type: Sequelize.QueryTypes.SELECT
+    const count = await this.count({
+      where: {
+        userId,
+        status: 'failed'
       }
-    );
+    });
 
-    return Boolean(result);
+    return count > 0;
   }
 
   static async incrementFailedCountAndPossiblyDisableById(id) {
@@ -93,6 +90,7 @@ export class Webhook extends Model {
       return;
     }
 
+    // FIXME MySQL only code
     await this.sequelize.query(
       'UPDATE Webhook SET failedCount = failedCount + 1, status = IF (failedCount >= ?, "failed", status) WHERE id = ?',
       {

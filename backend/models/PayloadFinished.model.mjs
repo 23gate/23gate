@@ -90,8 +90,12 @@ export class PayloadFinished extends Model {
   }
 
   static async expire(ageMinute) {
-    await this.sequelize.query('DELETE FROM PayloadFinished WHERE createdAt <= NOW() - INTERVAL ? MINUTE', {
-      replacements: [ ageMinute ]
+    await this.destroy({
+      where: {
+        createdAt: {
+          [Sequelize.Op.lte]: new Date(Date.now() - ageMinute * 60 * 1000)
+        }
+      }
     });
   }
 

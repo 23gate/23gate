@@ -68,9 +68,9 @@ export class Transaction extends Model {
       ')'
     ));
 
-    await this.sequelize.query(`INSERT IGNORE INTO Transaction (chainId, transactionHash, blockNumber, transactionIndex, json) VALUES ${records}`, {
-      transaction,
-      type: Sequelize.QueryTypes.UPDATE
+    await this.bulkCreate(records, {
+      ignoreDuplicates: true,
+      transaction
     });
   }
 

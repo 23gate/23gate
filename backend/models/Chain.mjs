@@ -33,11 +33,15 @@ export class Chain extends Model {
   }
 
   static async setByChainId(chainId, { blockNumber }, transaction) {
-    await this.sequelize.query(
-      'UPDATE Chain SET updatedAt = UNIX_TIMESTAMP(), blockNumber = ? WHERE chainId = ?',
+    await this.update(
       {
-        replacements: [ blockNumber, chainId ],
-        type: Sequelize.QueryTypes.UPDATE,
+        blockNumber,
+        updatedAt: Math.floor(Date.now() / 1000)
+      },
+      {
+        where: {
+          chainId
+        },
         transaction
       }
     );
